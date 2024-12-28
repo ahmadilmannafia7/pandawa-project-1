@@ -131,7 +131,7 @@
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Jumlah</p>
                             <p id="Quantity-Label" class="font-semibold text-lg mt-[2px] text-nowrap"><span
-                                    class="number">1</span> people</p>
+                                    class="number">1</span> orang</p>
                         </div>
                     </button>
                     <div id="Quantity-Dropdown" class="dropdown-content hidden absolute z-10 top-full mt-4">
@@ -139,7 +139,7 @@
                             <button type="button" id="minus" class="w-[38px] h-[38px] flex shrink-0">
                                 <img src="assets/images/icons/minus.svg" alt="icon">
                             </button>
-                            <p class="font-semibold text-nowrap"><span class="number">1</span> people</p>
+                            <p class="font-semibold text-nowrap"><span class="number">1</span> orang</p>
                             <input type="number" name="quantity" id="quantity" value="1" class="hidden">
                             <button type="button" id="plus" class="w-[38px] h-[38px] flex shrink-0">
                                 <img src="assets/images/icons/plus.svg" alt="icon">

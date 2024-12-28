@@ -54,7 +54,7 @@
             @if (request()->quantity)
                 <div class="flex flex-col gap-[2px]">
                     <p class="text-sm text-garuda-grey">Jumlah</p>
-                    <p class="font-semibold text-lg">{{request()->quantity}} people</p>
+                    <p class="font-semibold text-lg">{{request()->quantity}} orang</p>
                 </div>
                 @else
                 <div class="flex flex-col gap-[2px]">
@@ -160,7 +160,7 @@
                             <div class="flex flex-col gap-[2px] items-center justify-center">
                                 <p class="text-sm text-garuda-grey">
                                     {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                    hours
+                                    jam
                                 </p>
                                 <div class="flex items-center gap-[6px]">
                                     <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
@@ -175,7 +175,7 @@
                             </p>
                             <a href="{{route('flight.show', $flight->flight_number)}}"
                                 class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
-                                <span class="font-semibold text-white">Choose</span>
+                                <span class="font-semibold text-white">Pilih</span>
                             </a>
                         </label>
                         <hr class="border-[#E8EFF7]">
@@ -210,7 +210,7 @@
                                             <div class="h-8 border border-garuda-black border-dashed"></div>
                                             <p class="text-xs leading-[18px] text-garuda-grey">
                                                 {{ number_format($segment->time->diffInHours($flight->segments[$loop->index + 1]->time), 0) }}
-                                                hours
+                                                jam
                                             </p>
                                             <div class="h-8 border border-garuda-black border-dashed"></div>
                                         </div>
@@ -254,7 +254,7 @@
                             <div class="flex flex-col gap-[2px] items-center justify-center">
                                 <p class="text-sm text-garuda-grey">
                                     {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                    hours
+                                    jam
                                 </p>
                                 <div class="flex items-center gap-[6px]">
                                     <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}</p>
@@ -268,7 +268,7 @@
                             </p>
                             <a href="{{route('flight.show', $flight->flight_number)}}"
                                 class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
-                                <span class="font-semibold text-white">Choose</span>
+                                <span class="font-semibold text-white">Pilih</span>
                             </a>
                         </label>
                         <hr class="border-[#E8EFF7]">
@@ -282,10 +282,10 @@
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-4">
-                                        <img src="assets/images/icons/departure.svg" class="w-[50px] h-[50px] flex shrink-0"
+                                        <img src="assets/images/icons/arrow-up-circle-black.svg" class="w-[50px] h-[50px] flex shrink-0"
                                             alt="icon">
                                         <div>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">Departure</p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">Asal</p>
                                             <p class="font-semibold">
                                                 {{ $flight->segments->first()->airport->name }}({{ $flight->segments->first()->airport->iata_code }})
                                             </p>
@@ -296,7 +296,7 @@
                                     <div class="h-8 border border-garuda-black border-dashed"></div>
                                     <p class="text-xs leading-[18px] text-garuda-grey">
                                         {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                        hours
+                                        jam
                                     </p>
                                     <div class="h-8 border border-garuda-black border-dashed"></div>
                                 </div>
@@ -308,10 +308,10 @@
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-4">
-                                        <img src="assets/images/icons/arrival.svg" class="w-[50px] h-[50px] flex shrink-0"
+                                        <img src="assets/images/icons/arrow-up-circle-black.svg" class="w-[50px] h-[50px] flex shrink-0"
                                             alt="icon">
                                         <div>
-                                            <p class="text-sm text-garuda-grey mt-[2px]">Arrival</p>
+                                            <p class="text-sm text-garuda-grey mt-[2px]">Tujuan</p>
                                             <p class="font-semibold">
                                                 {{ $flight->segments->last()->airport->name }}({{ $flight->segments->last()->airport->iata_code }})
                                             </p>

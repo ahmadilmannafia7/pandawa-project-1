@@ -15,13 +15,13 @@
             <a href="choose-tiers.html"
                 class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
                 <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
-                <p class="font-semibold text-white">Back to Choose Flight</p>
+                <p class="font-semibold text-white">Kembali</p>
             </a>
-            <h1 class="font-extrabold text-[50px] leading-[75px]">Choose Seats</h1>
+            <h1 class="font-extrabold text-[50px] leading-[75px]">Pilih Kursi</h1>
             <div id="Flight-Info"
                 class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
                 <label class="flex items-center justify-between p-5">
-                    <h2 class="font-bold text-xl leading-[30px]">Your Flight</h2>
+                    <h2 class="font-bold text-xl leading-[30px]">Perjalanan Anda</h2>
                     <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
                         class="w-9 h-8 group-has-[:checked]:rotate-180 transition-all duration-300" alt="icon">
                     <input type="checkbox" class="hidden">
@@ -29,24 +29,24 @@
                 <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Departure</p>
+                            <p class="text-sm text-garuda-grey">Asal</p>
                             <p class="font-semibold text-lg">{{ $flight->segments->first()->airport->city }}
                                 ({{ $flight->segments->first()->airport->iata_code }})</p>
                         </div>
                         <div class="text-end">
-                            <p class="text-sm text-garuda-grey">Arrival</p>
+                            <p class="text-sm text-garuda-grey">Tujuan</p>
                             <p class="font-semibold text-lg">{{ $flight->segments->last()->airport->city }}
                                 ({{ $flight->segments->last()->airport->iata_code }})</p>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Date</p>
+                            <p class="text-sm text-garuda-grey">Tanggal</p>
                             <p class="font-semibold text-lg">{{ $flight->segments->first()->time->format('d F Y') }}</p>
                         </div>
                         <div class="text-end">
-                            <p class="text-sm text-garuda-grey">Quantity</p>
-                            <p class="font-semibold text-lg">3 people</p>
+                            <p class="text-sm text-garuda-grey">Jumlah</p>
+                            <p class="font-semibold text-lg">3 orang</p>
                         </div>
                     </div>
                     <div class="flex flex-col rounded-[20px] border border-[#E8EFF7] p-5 gap-5">
@@ -73,7 +73,7 @@
                                     <div class="flex flex-col gap-[2px] items-center justify-center">
                                         <p class="text-sm text-garuda-grey">
                                             {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                            hours
+                                            jam
                                         </p>
                                         <div class="flex items-center gap-[6px]">
                                             <p class="font-semibold">
@@ -118,7 +118,7 @@
             <div id="Transaction-Info"
                 class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
                 <label class="flex items-center justify-between p-5">
-                    <h2 class="font-bold text-xl leading-[30px]">Transaction Details</h2>
+                    <h2 class="font-bold text-xl leading-[30px]">Detail Transaksi</h2>
                     <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
                         class="w-9 h-8 group-has-[:checked]:rotate-180 transition-all duration-300" alt="icon">
                     <input type="checkbox" class="hidden">
@@ -126,26 +126,26 @@
                 <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Quantity</p>
-                            <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="quantity">0 People</p>
+                            <p class="text-sm text-garuda-grey">Jumlah</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="quantity">0 orang</p>
                         </div>
                         <div>
-                            <p class="text-sm text-garuda-grey">Tiers</p>
+                            <p class="text-sm text-garuda-grey">Kelas</p>
                             <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ ucfirst($tier->class_type) }}
                             </p>
                         </div>
                         <div>
-                            <p class="text-sm text-garuda-grey">Seats</p>
+                            <p class="text-sm text-garuda-grey">Kursi</p>
                             <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="selectedSeats">-</p>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Price</p>
+                            <p class="text-sm text-garuda-grey">Harga</p>
                             <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="price">Rp 0</p>
                         </div>
                         <div>
-                            <p class="text-sm text-garuda-grey">Govt. Tax</p>
+                            <p class="text-sm text-garuda-grey">PPN</p>
                             <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="tax">11%</p>
                         </div>
                         <div>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <p class="text-sm text-garuda-grey">Total Tax</p>
+                            <p class="text-sm text-garuda-grey">Total PPN</p>
                             <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="totalTax">Rp 0</p>
                         </div>
                         <div>
@@ -180,15 +180,15 @@
                     <div id="Legend" class="flex items-center justify-center mb-[30px] gap-5 mt-5">
                         <div class="flex items-center gap-[6px]">
                             <span class="w-4 h-4 flex shrink-0 rounded-[6px] bg-white border border-[#FFA44B]"></span>
-                            <span class="font-semibold">Available</span>
+                            <span class="font-semibold">Tersedia</span>
                         </div>
                         <div class="flex items-center gap-[6px]">
                             <span class="w-4 h-4 flex shrink-0 rounded-[6px] bg-[#C2C9DA]"></span>
-                            <span class="font-semibold">Booked</span>
+                            <span class="font-semibold">Dipesan</span>
                         </div>
                         <div class="flex items-center gap-[6px]">
                             <span class="w-4 h-4 flex shrink-0 rounded-[6px] bg-garuda-blue"></span>
-                            <span class="font-semibold">Selected</span>
+                            <span class="font-semibold">Dipilih</span>
                         </div>
                     </div>
                     <div id="Seats-Options"
@@ -220,7 +220,7 @@
                     </div>
                     <button type="submit"
                         class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300 mt-[30px]">
-                        <span class="font-semibold text-white">Continue Booking</span>
+                        <span class="font-semibold text-white">Lanjutkan Pesanan</span>
                     </button>
                 </form>
             </div>

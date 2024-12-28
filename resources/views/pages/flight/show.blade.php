@@ -15,7 +15,7 @@
         <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
         <p class="font-semibold text-white">Back to Choose Flight</p>
     </a>
-    <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Choose Tiers</h1>
+    <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Pilih Kelas</h1>
     <div class="flex gap-[30px] mt-[30px]">
         <div id="Flight-Info" class="flex flex-col w-[470px] shrink-0 h-fit rounded-[20px] bg-white p-5 gap-5">
             <h2 class="font-bold text-xl leading-[30px]">Perjalanan Anda</h2>
@@ -33,12 +33,12 @@
             </div>
             <div class="flex justify-between">
                 <div>
-                    <p class="text-sm text-garuda-grey">Date</p>
+                    <p class="text-sm text-garuda-grey">Tanggal</p>
                     <p class="font-semibold text-lg">{{ $flight->segments->first()->time->format('d F Y') }}</p>
                 </div>
                 <div class="text-end">
-                    <p class="text-sm text-garuda-grey">Quantity</p>
-                    <p class="font-semibold text-lg">3 people</p>
+                    <p class="text-sm text-garuda-grey">Jumlah</p>
+                    <p class="font-semibold text-lg">3 orang</p>
                 </div>
             </div>
             <div class="flex flex-col rounded-[20px] border border-[#E8EFF7] p-5 gap-5">
@@ -56,14 +56,14 @@
                             </div>
                         </div>
                         <a href="#" class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
-                            <p class="font-semibold text-white">Details</p>
+                            <p class="font-semibold text-white">Detail</p>
                         </a>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col gap-[2px] items-center justify-center">
                             <p class="text-sm text-garuda-grey">
                                 {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                hours
+                                jam
                             </p>
                             <div class="flex items-center gap-[6px]">
                                 <p class="font-semibold">{{ $flight->segments->first()->airport->iata_code }}
@@ -118,7 +118,7 @@
                     <button href="choose-seats-economy.html"
                         class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300"
                         onclick="document.getElementById('flight_class_id').value = {{ $class->id }}">
-                        <span class="font-semibold text-white">Choose</span>
+                        <span class="font-semibold text-white">Pilih</span>
                     </button>
                 </div>
             @endforeach
