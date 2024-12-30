@@ -140,7 +140,8 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <p class="text-sm text-garuda-grey">Discount</p>
-                            <p class="font-semibold text-lg leading-[27px] mt-[2px] text-garuda-green" id="discount">Rp 0</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px] text-garuda-green" id="discount">Rp
+                                0</p>
                         </div>
                         <div>
                             <p class="text-sm text-garuda-grey">Kode Promo</p>
@@ -164,7 +165,9 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('booking.payment', $flight->flight_number) }}" id="Right-Content" class="flex flex-col gap-[30px] w-[490px] shrink-0" method="POST">
+        
+        <form action="{{ route('booking.payment', $flight->flight_number) }}" id="Right-Content"
+            class="flex flex-col gap-[30px] w-[490px] shrink-0" method="POST">
             @csrf
             <div id="Customer-Info"
                 class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
@@ -210,7 +213,7 @@
                     </label>
                 </div>
             </div>
-            <!-- for accordions with select input inside, the script was different from the normal accordion -->
+            
 
             @foreach ($transaction['passengers'] as $passenger)
                 <div id="Passenger-{{ $loop->index + 1 }}"
@@ -237,14 +240,16 @@
                         </label>
                         <div class="flex flex-col gap-[10px]">
                             <p class="font-semibold">Tanggal Lahir</p>
+                            
                             <!-- <input type="hidden" name="passengers[{{ $loop->index }}][date_of_birth]"
-                                id="dateOfBirth-{{ $loop->index }}" data-index="{{ $loop->index }}"> -->
+                                    id="dateOfBirth-{{ $loop->index }}" data-index="{{ $loop->index }}"> -->
+                                    
                             <div class="flex items-center gap-[10px]">
                                 <label
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300 @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror">
                                     <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="day-select-{{ $loop->index }}" 
+                                    <select id="day-select-{{ $loop->index }}"
                                         class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}" onChange="updateDateOfBirth({{ $loop->index }})">
                                         @for ($i = 1; $i <= 31; $i++)
@@ -258,7 +263,7 @@
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300 @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror">
                                     <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="month-select-{{ $loop->index }}" 
+                                    <select id="month-select-{{ $loop->index }}"
                                         class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}" onChange="updateDateOfBirth({{ $loop->index }})">
                                         @for ($i = 1; $i <= 12; $i++)
@@ -272,7 +277,7 @@
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300 @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror">
                                     <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="year-select-{{ $loop->index }}" 
+                                    <select id="year-select-{{ $loop->index }}"
                                         class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}" onChange="updateDateOfBirth({{ $loop->index }})">
                                         @for ($i = date('Y'); $i >= 1900; $i--)
@@ -298,7 +303,8 @@
                                     <option hidden>Select country region</option>
                                     <option value="Singapore" {{ $passenger['nationality'] === 'Singapore' ? 'selected' : '' }}>Singapore</option>
                                     <option {{ $passenger['nationality'] === 'Japan' ? 'selected' : '' }}>Japan</option>
-                                    <option {{ $passenger['nationality'] === 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
+                                    <option {{ $passenger['nationality'] === 'Indonesia' ? 'selected' : '' }}>Indonesia
+                                    </option>
                                 </select>
                             </div>
                             @error('passengers.' . $loop->index . '.nationality')
@@ -329,7 +335,8 @@
                             <img src="{{asset('assets/images/icons/note-add-black.svg')}}"
                                 class="w-5 flex shrink-0 group-has-[:checked]:invert transition-all duration-300"
                                 alt="icon">
-                            <span class="font-semibold group-has-[:checked]:text-white">Transfer Bank (Coming Soon)</span>
+                            <span class="font-semibold group-has-[:checked]:text-white">Transfer Bank (Coming
+                                Soon)</span>
                             <input type="radio" name="payment-method" class="absolute opacity-0 left-1/2" disabled>
                         </label>
                     </div>
@@ -348,8 +355,8 @@
 <script>
     window.addEventListener('promoCodeUpdated', event => {
         //ambil harga produk dan jumlah seat yang dipilih
-        const price =parseFloat('{{ $tier->price }}');
-        const quantity =parseInt('{{ count($transaction['selected_seats']) }}');
+        const price = parseFloat('{{ $tier->price }}');
+        const quantity = parseInt('{{ count($transaction['selected_seats']) }}');
         const totalWithoutDiscount = price * quantity * 1.11;
 
         //variabel untuk menyimpan total baru dan total diskon
@@ -361,13 +368,13 @@
         const discountType = event.detail[0].discount_type;
         const discountValue = event.detail[0].discount;
 
-        if(discountType === 'percentage'){
-            totalPromo =totalWithoutDiscount * (discountValue / 100);
-        } else{
+        if (discountType === 'percentage') {
+            totalPromo = totalWithoutDiscount * (discountValue / 100);
+        } else {
             totalPromo = discountValue;
         }
 
-        newTotal =totalWithoutDiscount - totalPromo;
+        newTotal = totalWithoutDiscount - totalPromo;
 
         //tampilkan hasil perhitungan total dan promo yang diterapkan
         document.getElementById('promo-code').innerHTML = promoCode;
