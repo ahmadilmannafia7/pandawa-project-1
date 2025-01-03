@@ -97,21 +97,12 @@ class TransactionRepository implements TransactionRepositoryInterface
         return $grandTotal + $ppn;
     }
 
-    // private function createTransaction($data)
-    // {
-    //     return Transaction::create($data);
-    // }
+    
 
 
     private function createTransaction($data)
     {
-        // unset($data['_token']); // Remove _token if it exists
-        // unset($data['seat']); // Remove _token if it exists
-        // unset($data['selected_seats']); // Remove _token if it exists
-        // unset($data['passengers']); // Remove _token if it exists
-        // unset($data['promo_code']); // Remove _token if it exists
-        // unset($data['payment-method']); // Remove _token if it exists
-        // unset($data['discount']); // Remove _token if it exists
+        
         return Transaction::create($data);
     }
 
@@ -123,49 +114,18 @@ class TransactionRepository implements TransactionRepositoryInterface
         }
     }
 
-    // private function savePassengers($passengers, $transactionId)
-    // {
-    //     foreach ($passengers as $passenger) {
-    //         $passenger['transaction_id'] = $transactionId;
-    //         // Ensure flight_seat_id is included
-    //         if (!isset($passenger['flight_seat_id'])) {
-    //             if (isset($passenger['selected_seats'])) {
-    //                 $passenger['flight_seat_id'] = $passenger['selected_seats'];
-    //                 unset($passenger['selected_seats']);
-    //             } else {
-    //                 throw new \Exception('flight_seat_id is required for each passenger');
-    //             }
-    //         }
-    //         TransactionPassenger::create($passenger);
-    //     }
-    // }
-
-    // private function savePassengers($passengers, $transactionId)
-    // {
-    //     foreach ($passengers as $passenger) {
-    //         $passenger['transaction_id'] = $transactionId;
-    //         // Ensure flight_seat_id is included
-    //         if (!isset($passenger['flight_seat_id'])) {
-    //             throw new \Exception('flight_seat_id is required for each passenger');
-    //         }
-    //         TransactionPassenger::create($passenger);
-    //     }
-    // }
+    
 
     public function getTransactionByCode($code)
     {
         return Transaction::where('code', $code)->first();
     }
 
-    // public function getTransactionByCodeEmailPhone($code, $email, $phone)
-    // {
-    //     return Transaction::where('code', $code)->where('email', $email)->where('phone_number', $phone)->first();
-    // }
+    
 
-    public function getTransactionByCodeEmailPhone($code, $email, $phone)
+    public function getTransactionByCodePhone($code, $phone)
     {
         return Transaction::where('code', $code)
-            ->where('email', $email)
             ->where('phone', $phone)
             ->first();
     }
