@@ -11,9 +11,9 @@
 @section('content')
 <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
     <a href="{{ route('flight.index') }}"
-        class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+        class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
         <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
-        <p class="font-semibold text-white">Back to Choose Flight</p>
+        <p class="font-semibold text-white ">Kembali</p>
     </a>
     <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Pilih Kelas</h1>
     <div class="flex gap-[30px] mt-[30px]">
@@ -116,7 +116,7 @@
                         </div>
                     @endforeach
                     <button href="choose-seats-economy.html"
-                        class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300"
+                        class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300" style="background-color: #D9A520;"
                         onclick="document.getElementById('flight_class_id').value = {{ $class->id }}">
                         <span class="font-semibold text-white">Pilih</span>
                     </button>

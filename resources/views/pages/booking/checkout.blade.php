@@ -1,49 +1,50 @@
 @extends('layouts.app')
 
 @section('include')
-    <div id="Background"
-        class="absolute top-0 w-full h-[810px] bg-[linear-gradient(180deg,#85C8FF_0%,#D4D1FE_47.05%,#F3F6FD_100%)]">
-        <img src="{{ asset('assets/images/backgrounds/Jumbo Jet Sky (1) 1.png') }}"
-            class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image">
+<div id="Background-home" class="absolute w-full h-full top-0 bg-white">
+    <div class="absolute top-0 w-full h-[1020px]"
+        style="height: 3000px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+
     </div>
+</div>
 @endsection
 
 @section('content')
     <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
         <a href="choose-seats-economy.html"
-            class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+            class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
             <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
-            <p class="font-semibold text-white">Back to Choose Seats</p>
+            <p class="font-semibold text-white">Kembali</p>
         </a>
-        <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Passenger Details</h1>
+        <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Checkout</h1>
         <div class="flex gap-[30px] mt-[30px]">
             <div id="Left-Content" class="flex flex-col gap-[30px] w-[470px] shrink-0">
                 <div id="Flight-Info" class="flex flex-col w-[470px] shrink-0 h-fit rounded-[20px] bg-white p-5 gap-5">
-                    <h2 class="font-bold text-xl leading-[30px]">Your Flight</h2>
+                    <h2 class="font-bold text-xl leading-[30px]">Perjalanan Anda</h2>
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Departure</p>
+                            <p class="text-sm text-garuda-grey">Asal</p>
                             <p class="font-semibold text-lg">
-                                {{ $flight->segments->first()->airport->name }} (
-                                {{ $flight->segments->first()->airport->iata_code }})
+                                {{ $flight->segments->first()->airport->name }} 
+                                ({{ $flight->segments->first()->airport->iata_code }})
                             </p>
                         </div>
                         <div class="text-end">
-                            <p class="text-sm text-garuda-grey">Arrival</p>
+                            <p class="text-sm text-garuda-grey">Tujuan</p>
                             <p class="font-semibold text-lg">
-                                {{ $flight->segments->last()->airport->name }} (
-                                {{ $flight->segments->last()->airport->iata_code }})
+                                {{ $flight->segments->last()->airport->name }} 
+                                ({{ $flight->segments->last()->airport->iata_code }})
                             </p>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div>
-                            <p class="text-sm text-garuda-grey">Date</p>
+                            <p class="text-sm text-garuda-grey">Tanggal</p>
                             <p class="font-semibold text-lg"> {{ $flight->segments->first()->time->format('d F y') }} </p>
                         </div>
                         <div class="text-end">
-                            <p class="text-sm text-garuda-grey">Quantity</p>
-                            <p class="font-semibold text-lg">{{ count($transaction['selected_seats']) }} people</p>
+                            <p class="text-sm text-garuda-grey">Jumlah</p>
+                            <p class="font-semibold text-lg">{{ count($transaction['selected_seats']) }} orang</p>
                         </div>
                     </div>
                     <div class="flex flex-col rounded-[20px] border border-[#E8EFF7] p-5 gap-5">
@@ -62,14 +63,14 @@
                                 </div>
                                 <a href="#"
                                     class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
-                                    <p class="font-semibold text-white">Details</p>
+                                    <p class="font-semibold text-white">Detail</p>
                                 </a>
                             </div>
                             <div class="flex items-center justify-between">
                                 <div class="flex flex-col gap-[2px] items-center justify-center">
                                     <p class="text-sm text-garuda-grey">
                                         {{ number_format($flight->segments->first()->time->diffInHours($flight->segments->last()->time), 0) }}
-                                        Hours
+                                        Jam
                                     </p>
                                     <div class="flex items-center gap-[6px]">
                                         <p class="font-semibold">
@@ -102,7 +103,7 @@
                 <div id="Transaction-Info"
                     class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
                     <label class="flex items-center justify-between p-5">
-                        <h2 class="font-bold text-xl leading-[30px]">Transaction Details</h2>
+                        <h2 class="font-bold text-xl leading-[30px]">Detail Transaksi</h2>
                         <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
                             class="w-9 h-8 group-has-[:checked]:rotate-180 transition-all duration-300" alt="icon">
                         <input type="checkbox" class="hidden">
@@ -110,17 +111,17 @@
                     <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
                         <div class="flex justify-between">
                             <div>
-                                <p class="text-sm text-garuda-grey">Quantity</p>
+                                <p class="text-sm text-garuda-grey">Jumlah</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
-                                    {{ count($transaction['selected_seats']) }} People</p>
+                                    {{ count($transaction['selected_seats']) }} orang</p>
                             </div>
                             <div>
-                                <p class="text-sm text-garuda-grey">Tiers</p>
+                                <p class="text-sm text-garuda-grey">Kelas</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
                                     {{ ucfirst($tier->class_type) }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-garuda-grey">Seats</p>
+                                <p class="text-sm text-garuda-grey">Kursi</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
                                     {{ implode(', ',$flight->seats->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray()) }}
                                 </p>
@@ -128,13 +129,13 @@
                         </div>
                         <div class="flex justify-between">
                             <div>
-                                <p class="text-sm text-garuda-grey">Price</p>
+                                <p class="text-sm text-garuda-grey">Harga</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
                                     {{ 'Rp. ' . number_format($tier->price, 0, ',', '.') }}
                                 </p>
                             </div>
                             <div>
-                                <p class="text-sm text-garuda-grey">Govt. Tax</p>
+                                <p class="text-sm text-garuda-grey">PPN</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">11%</p>
                             </div>
                             <div>
@@ -159,7 +160,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <div>
-                                <p class="text-sm text-garuda-grey">Total Tax</p>
+                                <p class="text-sm text-garuda-grey">Total PPN</p>
                                 <p class="font-semibold text-lg leading-[27px] mt-[2px]">
                                     {{ 'Rp. ' . number_format($tier->price * count($transaction['selected_seats']) * 0.11, 0, ',', '.') }}
                                 </p>
@@ -180,14 +181,14 @@
                 <div id="Customer-Info"
                     class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
                     <label class="flex items-center justify-between p-5">
-                        <h2 class="font-bold text-xl leading-[30px]">Customer Information</h2>
+                        <h2 class="font-bold text-xl leading-[30px]">Informasi Pelanggan</h2>
                         <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
                             class="w-9 h-8 group-has-[:checked]:rotate-180 transition-all duration-300" alt="icon">
                         <input type="checkbox" class="hidden">
                     </label>
                     <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
                         <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Complete Name</p>
+                            <p class="font-semibold">Nama Lengkap</p>
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0"
@@ -198,7 +199,7 @@
                             </div>
                         </label>
                         <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Email Address</p>
+                            <p class="font-semibold">Alamat Email</p>
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/sms-black.png') }}" class="w-5 flex shrink-0"
@@ -209,7 +210,7 @@
                             </div>
                         </label>
                         <label class="flex flex-col gap-[10px]">
-                            <p class="font-semibold">Phone No.</p>
+                            <p class="font-semibold">No. Telepon</p>
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/call-black.svg') }}" class="w-5 flex shrink-0"
@@ -225,13 +226,13 @@
                     <div id="Passenger-{{ $loop->index + 1 }}"
                         class="accordion-with-select group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden transition-all duration-300">
                         <button type="button" class="accordion-btn flex items-center justify-between p-5">
-                            <h2 class="font-bold text-xl leading-[30px]">Passenger {{ $loop->index + 1 }}</h2>
+                            <h2 class="font-bold text-xl leading-[30px]">Penumpang {{ $loop->index + 1 }}</h2>
                             <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}"
                                 class="arrow w-9 h-8 transition-all duration-300" alt="icon">
                         </button>
                         <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
                             <label class="flex flex-col gap-[10px]">
-                                <p class="font-semibold">Complete Name</p>
+                                <p class="font-semibold">Nama Lengkap</p>
                                 <div
                                     class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
                                 @error('passengers.' . $loop->index . '.name') border-red-500 @enderror">
@@ -246,7 +247,7 @@
                                 @enderror
                             </label>
                             <div class="flex flex-col gap-[10px]">
-                                <p class="font-semibold">Date of Birth</p>
+                                <p class="font-semibold">Tanggal Lahir</p>
 
                                 <div class="flex items-center gap-[10px]">
                                     <!-- Dropdown untuk hari -->
@@ -310,7 +311,7 @@
                                 @enderror
                             </div>
                             <label class="flex flex-col gap-[10px]">
-                                <p class="font-semibold">Nationality</p>
+                                <p class="font-semibold">Kebangsaan</p>
                                 <div
                                     class="relative flex items-center w-full rounded-full overflow-hidden border border-garuda-black gap-[10px] focus-within:border-[#0068FF] transition-all duration-300
                                 @error('passengers.' . $loop->index . '.nationality') border-red-500 @enderror">
@@ -338,9 +339,9 @@
                 @endforeach
                 @livewire('check-promo-code')
                 <div id="Payment-Method" class="flex flex-col rounded-[20px] p-5 gap-5 bg-white overflow-hidden">
-                    <h2 class="font-bold text-xl leading-[30px]">Payment Method</h2>
+                    <h2 class="font-bold text-xl leading-[30px]">Metode Pembayaran</h2>
                     <div class="flex flex-col gap-[10px]">
-                        <p class="font-semibold">Choose Payment</p>
+                        <p class="font-semibold">Pilih Pembayaran</p>
                         <div class="flex items-center flex-nowrap gap-[10px]">
                             <label
                                 class="group relative flex items-center w-full rounded-full py-3 px-5 bg-garuda-bg-dark-grey gap-[10px] has-[:checked]:bg-garuda-orange transition-all duration-300">
@@ -363,8 +364,8 @@
                     </div>
                 </div>
                 <button type="submit"
-                    class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
-                    <span class="font-semibold text-white">Continue to Payment</span>
+                    class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300" style="background-color: #D9A520;">
+                    <span class="font-semibold text-white">Lanjutkan Pembayaran</span>
                 </button>
             </form>
         </div>

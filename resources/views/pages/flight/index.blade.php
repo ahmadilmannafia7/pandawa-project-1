@@ -3,9 +3,17 @@
 @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px]"
-        style="background: linear-gradient(180deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        style="height: 2000px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+
     </div>
 </div>
+<!-- <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
+    <div class="relative top-0 w-full h-[1020px]"
+        style="background: linear-gradient(180deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        <img src="assets/images/backgrounds/pngtree-javanese-arjuna-wayang-png-image_8815856.png"
+            class="absolute right-0 top-[147px] object-contain max-h-[481px] translate-x-[-50px]" alt="background image">
+    </div>
+</div> -->
 @endsection
 
 @section('content')
@@ -31,7 +39,7 @@
                     <p class="text-sm text-garuda-grey">Tujuan</p>
                     <p class="font-semibold text-lg">{{request()->arrival}}</p>
                 </div>
-                @else
+            @else
                 <div class="flex flex-col gap-[2px]">
                     <p class="text-sm text-garuda-grey">Tujuan</p>
                     <p class="font-semibold text-lg">-</p>
@@ -44,7 +52,7 @@
                     <p class="text-sm text-garuda-grey">Tanggal</p>
                     <p class="font-semibold text-lg">{{request()->date}}</p>
                 </div>
-                @else
+            @else
                 <div class="flex flex-col gap-[2px]">
                     <p class="text-sm text-garuda-grey">Tanggal</p>
                     <p class="font-semibold text-lg">-</p>
@@ -56,7 +64,7 @@
                     <p class="text-sm text-garuda-grey">Jumlah</p>
                     <p class="font-semibold text-lg">{{request()->quantity}} orang</p>
                 </div>
-                @else
+            @else
                 <div class="flex flex-col gap-[2px]">
                     <p class="text-sm text-garuda-grey">Jumlah</p>
                     <p class="font-semibold text-lg">-</p>
@@ -174,7 +182,8 @@
                                 {{'Rp. ' . number_format($flight->classes->first()->price, 0, ',', '.') }}
                             </p>
                             <a href="{{route('flight.show', $flight->flight_number)}}"
-                                class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
+                                class="rounded-full py-3 px-5 text-center bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300"
+                                style="background-color: #B8860B;">
                                 <span class="font-semibold text-white">Pilih</span>
                             </a>
                         </label>
@@ -267,7 +276,8 @@
                                 {{'Rp. ' . number_format($flight->classes->first()->price, 0, ',', '.') }}
                             </p>
                             <a href="{{route('flight.show', $flight->flight_number)}}"
-                                class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
+                                class="rounded-full py-3 px-5 text-center bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300"
+                                style="background-color: #B8860B;">
                                 <span class="font-semibold text-white">Pilih</span>
                             </a>
                         </label>
@@ -282,8 +292,8 @@
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-4">
-                                        <img src="assets/images/icons/arrow-up-circle-black.svg" class="w-[50px] h-[50px] flex shrink-0"
-                                            alt="icon">
+                                        <img src="assets/images/icons/arrow-up-circle-black.svg"
+                                            class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                         <div>
                                             <p class="text-sm text-garuda-grey mt-[2px]">Asal</p>
                                             <p class="font-semibold">
@@ -308,8 +318,8 @@
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-4">
-                                        <img src="assets/images/icons/arrow-up-circle-black.svg" class="w-[50px] h-[50px] flex shrink-0"
-                                            alt="icon">
+                                        <img src="assets/images/icons/arrow-up-circle-black.svg"
+                                            class="w-[50px] h-[50px] flex shrink-0" alt="icon">
                                         <div>
                                             <p class="text-sm text-garuda-grey mt-[2px]">Tujuan</p>
                                             <p class="font-semibold">

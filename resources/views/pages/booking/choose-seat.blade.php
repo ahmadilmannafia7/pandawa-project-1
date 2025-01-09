@@ -3,7 +3,8 @@
 @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px]"
-        style="background: linear-gradient(90deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        style="height: 1400px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+
     </div>
 </div>
 @endsection
@@ -13,7 +14,7 @@
     <div class="flex">
         <div id="Left-Content" class="flex flex-col gap-[30px] w-[470px] shrink-0">
             <a href="choose-tiers.html"
-                class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
+                class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                 <img src="{{ asset('assets/images/icons/arrow-left-white.svg') }}" class="w-6 h-6" alt="icon">
                 <p class="font-semibold text-white">Kembali</p>
             </a>
@@ -58,7 +59,7 @@
                                 </div>
                                 <a href="#"
                                     class="flex items-center rounded-[50px] py-3 px-5 gap-[10px] w-fit bg-garuda-black">
-                                    <p class="font-semibold text-white">Details</p>
+                                    <p class="font-semibold text-white">Detail</p>
                                 </a>
                             </div>
                             <div class="flex items-center justify-between">
@@ -219,7 +220,7 @@
                         @endforeach
                     </div>
                     <button type="submit"
-                        class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300 mt-[30px]">
+                        class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300 mt-[30px]" style="background-color: #D9A520;">
                         <span class="font-semibold text-white">Lanjutkan Pesanan</span>
                     </button>
                 </form>

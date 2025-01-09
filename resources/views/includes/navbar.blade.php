@@ -18,12 +18,12 @@
             </li>
         </ul>
         <div class="flex items-center gap-3">
-            <a href="#" class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px]">
+            <a href="#" class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                 <img src="{{ asset('assets/images/icons/call-calling-black.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                 <span class="font-semibold">Hubungi</span>
             </a>
             <a href="{{ route('booking.check') }}"
-                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] bg-garuda-black">
+                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] bg-garuda-black hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                 <img src="{{ asset('assets/images/icons/note-favorite-white.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                 <span class="font-semibold text-white">Tiket Saya</span>
             </a>

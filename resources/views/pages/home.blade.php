@@ -4,11 +4,19 @@
 @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px]"
-        style="background: linear-gradient(180deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
-        <img src="assets/images/backgrounds/pngtree-javanese-arjuna-wayang-png-image_8815856.png"
-                class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image">
+        style="height: 2000px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        <img src="{{ asset('assets/images/backgrounds/pngtree-javanese-arjuna-wayang-png-image_8815856.png') }}"
+            class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image"
+            style="transform: translateX(-200px);">
     </div>
 </div>
+<!-- <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
+    <div class="relative top-0 w-full h-[1020px]"
+        style="background: linear-gradient(180deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        <img src="assets/images/backgrounds/pngtree-javanese-arjuna-wayang-png-image_8815856.png"
+            class="absolute right-0 top-[147px] object-contain max-h-[481px] translate-x-[-50px]" alt="background image">
+    </div>
+</div> -->
 @endsection
 <!-- @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
@@ -28,8 +36,9 @@
         <p class="font-semibold text-sm">Armada Unit Elegan dan Berkelas </p>
     </div>
     <h1 class="font-extrabold text-[50px] leading-[75px]">Armada unit elegan <br>dan berkelas</h1>
-    <p class="text-lg leading-8">Kami menyiapkan unit sesuai dengan kebutuhan Anda. Terdapat berbagai pilihan unit yang tersedia. <br>Untuk perjalanan wisata, keluarga hingga untuk kebutuhan bisnis atau korporat.
-    <br>Rasakan kenyamanan perjalanan dengan PO. Pandawa 87 Pasuruan.</p>
+    <p class="text-lg leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia sint mollitia<br>
+        veritatis sapiente repellat porro accusantium nemo enim. <br>Natus modi in quasi quam pariatur ipsam ullam quos
+        velit quo laborum!</p>
 </div>
 <form action="{{ route('flight.index') }}" method="GET"
     class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
@@ -52,17 +61,6 @@
                     <div id="Departure-Dropdown"
                         class="dropdown-content hidden absolute z-10 top-full mt-4 h-[232px] rounded-[18px] bg-white border border-[#E8EFF7] overflow-y-scroll custom-scrollbar">
                         <div class="flex flex-col justify-center w-[483px] p-5 gap-4 shrink-0">
-                            <!-- <label
-                                class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
-                                <input type="radio" name="departure-radio" id=""
-                                    class="absolute top-1/2 left-1/2 opacity-0">
-                                <img src="assets/images/icons/airplane-black.svg" class="flex shrink-0 w-[34px]"
-                                    alt="icon">
-                                <div class="flex flex-col gap-[2px]">
-                                    <p class="font-semibold">Angga Capital Airport</p>
-                                    <p class="text-sm text-garuda-grey">Bandung, Indonesia</p>
-                                </div>
-                            </label> -->
                             @foreach ($airports as $airport)
                                 <label
                                     class="relative flex items-center rounded-[10px] gap-[10px] p-0 has-[:checked]:p-[10px] has-[:checked]:bg-garuda-bg-grey transition-all duration-300">
@@ -186,5 +184,23 @@
 
         </div>
     </div>
+
+    <form action="{{ route('flight.index') }}" method="GET"
+        class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
+        <div class="flex flex-col rounded-[30px] p-[30px] gap-4 bg-white">
+            <h2 class="font-bold text-xl leading-[30px]">supported by</h2>
+            <div style="display: flex; gap: 50px;">
+                <img src="{{ asset('assets/images/logos/laravellogo.png') }}" alt=""
+                    style="width: 100px; height: 100px; ">
+                <img src="{{ asset('assets/images/logos/filamentlogo.jpg') }}" alt=""
+                    style="width: 100px; height: 100px; ">
+                <img src="{{ asset('assets/images/logos/midtranslogo.jpg') }}" alt=""
+                    style="width: 100px; height: 100px; ">
+            </div>
+
+
+
+        </div>
+    </form>
 </section>
 @endsection

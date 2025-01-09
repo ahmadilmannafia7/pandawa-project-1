@@ -10,14 +10,14 @@
 
 @section('content')
 <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
-    <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Check Booking</h1>
+    <h1 class="font-extrabold text-[50px] leading-[75px] mt-[30px]">Cari Pesanan</h1>
     <div class="flex gap-[30px] mt-[30px]">
         <form action="{{ route('booking.check') }}" method="POST" class="flex flex-col gap-[30px] w-[490px] shrink-0">
             @csrf
             <div id="Booking-details" class="flex flex-col rounded-[20px] p-5 gap-5 bg-white overflow-hidden">
-                <h2 class="font-bold text-xl leading-[30px]">Track Your Booking Details</h2>
+                <h2 class="font-bold text-xl leading-[30px]">Cek Pesanan Tiket Anda</h2>
                 <div class="flex flex-col gap-5">
-                    <p class="font-semibold">Booking Transaction ID</p>
+                    <p class="font-semibold">ID Transaksi Pesanan</p>
                     <div
                         class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                         <img src="assets/images/icons/note-favorite-black.svg" class="w-5 flex shrink-0" alt="icon">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col gap-5">
-                    <p class="font-semibold">Phone No.</p>
+                    <p class="font-semibold">No. Telepon</p>
                     <div
                         class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                         <img src="assets/images/icons/call-black.svg" class="w-5 flex shrink-0" alt="icon">
@@ -37,15 +37,15 @@
                     </div>
                 </div>
                 <button type="submit"
-                    class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
-                    <span class="font-semibold text-white">View My Booking Details</span>
+                    class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300" style="background-color: #D9A520;">
+                    <span class="font-semibold text-white">Cari Detail Pesanan Saya</span>
                 </button>
                 <p class="mt-5">Jika anda memiliki masalah dalam pemeriksaan status silahkan menghubungi tim sales kami
                     untuk anda</p>
                 <a href="#"
-                    class="flex justify-center w-full rounded-full py-3 px-5 text-center border border-garuda-black gap-[10px]">
+                    class="flex justify-center w-full rounded-full py-3 px-5 text-center border border-garuda-black gap-[10px] hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                     <img src="assets/images/icons/call-calling-black.svg" class="w-5 flex shrink-0" alt="icon">
-                    <span class="font-semibold">Call Us</span>
+                    <span class="font-semibold">Hubungi Kami</span>
                 </a>
             </div>
         </form>
