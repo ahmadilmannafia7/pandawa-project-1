@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        git credentialsId: 'pandawa-github', url: 'https://github.com/ahmadilmannafia7/pandawa-project-1.git'
+                        git credentialsId: 'pandawa87-project', url: 'https://github.com/ahmadilmannafia7/pandawa-project-1'
                     } catch (Exception e) {
                         error "Failed to retrieve source code: ${e.message}"
                     }
