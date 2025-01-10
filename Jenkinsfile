@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-        jdk 'JDK 21'
-        maven 'maven3'
-    }
 
     environment {
         IMAGE_TAG = ''
