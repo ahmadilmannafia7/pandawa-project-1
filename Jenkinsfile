@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def commitHash = bat(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                        def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                         IMAGE_TAG = commitHash
                     } catch (Exception e) {
                         error "Failed to generate commit hash: ${e.message}"
@@ -36,11 +36,11 @@ pipeline {
             steps {
                 script {
                     try {
-                        def isGdInstalled = bat(script: 'php -m | findstr gd', returnStatus: true)
+                        def isGdInstalled = sh(script: 'php -m | grep gd', returnStatus: true)
                         if (isGdInstalled != 0) {
                             error "PHP GD extension is missing. Enable it in php.ini."
                         }
-                        bat 'composer install --no-dev --optimize-autoloader'
+                        sh 'composer install --no-dev --optimize-autoloader'
                     } catch (Exception e) {
                         error "Dependency installation failed: ${e.message}"
                     }
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat "docker build -t ahmadilmannafia/pandawa-app:${IMAGE_TAG} ."
+                        sh "docker build -t ahmadilmannafia/pandawa-app:${IMAGE_TAG} ."
                     } catch (Exception e) {
                         error "Docker image creation failed: ${e.message}"
                     }
