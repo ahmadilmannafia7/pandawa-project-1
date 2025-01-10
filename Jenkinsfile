@@ -1,97 +1,59 @@
 pipeline {
     agent any
-
     environment {
-        IMAGE_TAG = ''
-        TEAMS_WEBHOOK = 'https://telkomuniversityofficial.webhook.office.com/webhookb2/32a7e491-58ba-4d00-80ce-9235050979f7@90affe0f-c2a3-4108-bb98-6ceb4e94ef15/IncomingWebhook/0e24ad599f5c4fbd8525cf35fe91cb92/5eb143ec-c5e8-4183-aed2-5634c1e19a7a/V2zYbXK6ZdAjbU5FGzUN6IDSaLh5TWHGdC2Gjlfk7EOnc1'
+        GIT_URL = 'https://github.com/ahmadilmannafia7/pandawa-project-1'
+        BRANCH_NAME = 'main'  // Sesuaikan dengan branch yang Anda gunakan
     }
-
     stages {
-        stage('Source Code Retrieval') {
+        stage('Checkout Code') {
             steps {
                 script {
-                    try {
-                        git credentialsId: 'pandawa87-project', url: 'https://github.com/ahmadilmannafia7/pandawa-project-1'
-                    } catch (Exception e) {
-                        error "Failed to retrieve source code: ${e.message}"
-                    }
+                    // Pastikan Git sudah terinstall dan dapat digunakan di Windows
+                    sh 'git config --global core.autocrlf input'
+                    sh 'git config --global user.name "Your Name"'
+                    sh 'git config --global user.email "your-email@example.com"'
+                    git url: GIT_URL, branch: BRANCH_NAME
                 }
             }
         }
 
-        stage('Generate Version') {
+        stage('Build') {
             steps {
                 script {
-                    try {
-                        def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                        IMAGE_TAG = commitHash
-                    } catch (Exception e) {
-                        error "Failed to generate commit hash: ${e.message}"
-                    }
-                }
-            }
-        }
-
-        stage('Dependency Setup') {
-            steps {
-                script {
-                    try {
-                        def isGdInstalled = sh(script: 'php -m | grep gd', returnStatus: true)
-                        if (isGdInstalled != 0) {
-                            error "PHP GD extension is missing. Enable it in php.ini."
-                        }
-                        sh 'composer install --no-dev --optimize-autoloader'
-                    } catch (Exception e) {
-                        error "Dependency installation failed: ${e.message}"
-                    }
+                    echo 'Running Build Process...'
+                    // Sesuaikan dengan perintah build yang Anda perlukan
+                    bat 'echo Building...'
                 }
             }
         }
 
         stage('Docker Image Creation') {
-            when {
-                expression { currentBuild.result == null }
-            }
             steps {
                 script {
-                    try {
-                        sh "docker build -t ahmadilmannafia/pandawa-app:${IMAGE_TAG} ."
-                    } catch (Exception e) {
-                        error "Docker image creation failed: ${e.message}"
-                    }
+                    echo 'Creating Docker Image...'
+                    // Menjalankan perintah Docker sesuai dengan konfigurasi Anda
+                    bat 'docker build -t myapp .'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    echo 'Deploying Application...'
+                    // Perintah untuk deployment aplikasi Anda
+                    bat 'docker run -d -p 8080:80 myapp'
                 }
             }
         }
     }
-
     post {
         always {
-            echo 'Cleaning workspace after execution...'
-            cleanWs()
+            echo 'Cleaning up...'
+            cleanWs()  // Membersihkan workspace Jenkins setelah pipeline selesai
         }
-
-        success {
-            echo 'Pipeline completed successfully!'
-            script {
-                def successMessage = "🚀 **Build Successful!** Docker image built with tag: ${IMAGE_TAG}. 🎉 The Pandawa system is ready to roll out. Check Jenkins logs for more info and enjoy your coffee! ☕"
-                sh """
-                curl -H "Content-Type: application/json" -d '{
-                    "text": "${successMessage}"
-                }' ${env.TEAMS_WEBHOOK}
-                """
-            }
-        }
-
         failure {
-            echo 'Pipeline execution failed. Check logs for details.'
-            script {
-                def failureMessage = '❌ **Build Failed!** Something went wrong! Check the Jenkins logs to find out more. We’ll sort it out! 💪'
-                sh """
-                curl -H "Content-Type: application/json" -d '{
-                    "text": "${failureMessage}"
-                }' ${env.TEAMS_WEBHOOK}
-                """
-            }
+            echo 'Pipeline Failed. Please check the logs!'
         }
     }
 }
