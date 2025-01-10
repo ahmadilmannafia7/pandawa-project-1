@@ -1,18 +1,17 @@
 pipeline {
     agent any
+
     environment {
-        GIT_URL = 'https://github.com/ahmadilmannafia7/pandawa-project-1'
-        BRANCH_NAME = 'main'  // Sesuaikan dengan branch yang Anda gunakan
+        DOCKER_IMAGE = 'pandawa' // Ganti dengan nama image Docker yang sesuai
+        DOCKER_CONTAINER = 'pandawa-app' // Ganti dengan nama container yang sesuai
     }
+
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
                 script {
-                    // Pastikan Git sudah terinstall dan dapat digunakan di Windows
-                    sh 'git config --global core.autocrlf input'
-                    sh 'git config --global user.name "Your Name"'
-                    sh 'git config --global user.email "your-email@example.com"'
-                    git url: GIT_URL, branch: BRANCH_NAME
+                    // Meng-clone repository dari Git
+                    git url: 'https://github.com/ahmadilmannafia7/pandawa-project-1' // Ganti dengan URL repository Anda
                 }
             }
         }
@@ -20,40 +19,44 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'Running Build Process...'
-                    // Sesuaikan dengan perintah build yang Anda perlukan
-                    bat 'echo Building...'
+                    // Menjalankan build Docker
+                    bat 'docker build -t ${DOCKER_IMAGE} .' // Gunakan perintah 'bat' untuk Windows
                 }
             }
         }
 
-          stage('Docker Image Creation') {
+        stage('Run Docker') {
             steps {
                 script {
-                    echo 'Creating Docker Image...'
-                    // Pastikan build dilakukan di direktori yang sesuai dengan Dockerfile
-                    bat 'docker build -f Dockerfile -t myapp .'
+                    // Menjalankan container Docker
+                    bat 'docker run -d --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}' // Gunakan perintah 'bat' untuk Windows
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Test') {
             steps {
                 script {
-                    echo 'Deploying Application...'
-                    // Perintah untuk deployment aplikasi Anda
-                    bat 'docker run -d -p 8080:80 myapp'
+                    // Contoh menjalankan tes atau perintah lainnya
+                    bat 'docker ps' // Gunakan perintah 'bat' untuk Windows
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    // Membersihkan container Docker
+                    bat 'docker rm -f ${DOCKER_CONTAINER}' // Gunakan perintah 'bat' untuk Windows
                 }
             }
         }
     }
+
     post {
         always {
-            echo 'Cleaning up...'
-            cleanWs()  // Membersihkan workspace Jenkins setelah pipeline selesai
-        }
-        failure {
-            echo 'Pipeline Failed. Please check the logs!'
+            // Tahap pembersihan jika dibutuhkan
+            echo 'Pipeline selesai!'
         }
     }
 }
