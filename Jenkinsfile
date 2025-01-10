@@ -101,20 +101,26 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
     post {
         success {
             // Kirim notifikasi ke Teams jika build berhasil
-            sh '''
-            curl -H "Content-Type: application/json" -d '{
-                "text": "Build and Deployment Successful! Commit: ${env.GIT_COMMIT_SHORT}"
-            }' ${env.TEAMS_WEBHOOK_URL}
-            '''
+            script {
+                def message = "Build and Deployment Successful! Commit: ${env.GIT_COMMIT_SHORT}"
+                sh """
+                curl -H "Content-Type: application/json" -d '{
+                    "text": "${message}"
+                }' ${env.TEAMS_WEBHOOK_URL}
+                """
+            }
         }
 
         failure {
             // Kirim notifikasi ke Teams jika build gagal
-            sh '''
-            curl -H "Content-Type: application/json" -d '{
-                "text": "Build and Deployment Failed! Commit: ${env.GIT_COMMIT_SHORT}"
-            }' ${env.TEAMS_WEBHOOK_URL}
-            '''
+            script {
+                def message = "Build and Deployment Failed! Commit: ${env.GIT_COMMIT_SHORT}"
+                sh """
+                curl -H "Content-Type: application/json" -d '{
+                    "text": "${message}"
+                }' ${env.TEAMS_WEBHOOK_URL}
+                """
+            }
         }
     }
 }
