@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        jdk 'JDK 21'
+        maven 'maven3'
+    }
 
     environment {
         GIT_COMMIT_SHORT = "${sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()}"
