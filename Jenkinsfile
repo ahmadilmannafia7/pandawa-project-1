@@ -63,16 +63,16 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
         stage('Build Docker Image') {
             steps {
                 // Build Docker image dengan tag berdasarkan commit
-                bat "docker build -t ahmadilmannafia/pandawa-app:${env.GIT_COMMIT_SHORT} ."
+                sh "docker build -t ahmadilmannafia/pandawa-app:${env.GIT_COMMIT_SHORT} ."
             }
         }
 
         stage('Push Docker Image') {
             steps {
                 // Login ke Docker Hub menggunakan kredensial
-                withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKERHUB_TOKEN')]) {
-                    bat """
-                    echo ${DOCKERHUB_TOKEN} | docker login -u ahmadilmannafia --password-stdin
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                    echo '${DOCKER_PASS}' | docker login -u ${DOCKER_USER} --password-stdin
                     docker push ahmadilmannafia/pandawa-app:${env.GIT_COMMIT_SHORT}
                     """
                 }
@@ -83,7 +83,7 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
             steps {
                 // Deploy aplikasi Laravel menggunakan Docker Compose
                 sshagent(['ssh-credentials-id']) {
-                    bat """
+                    sh """
                     ssh your-deployment-server << EOF
                     # Pull image terbaru
                     docker-compose pull
@@ -105,7 +105,7 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
             // Kirim notifikasi ke Teams jika build berhasil
             script {
                 def message = "Build and Deployment Successful! Commit: ${env.GIT_COMMIT_SHORT}"
-                bat """
+                sh """
                 curl -H "Content-Type: application/json" -d '{
                     "text": "${message}"
                 }' ${env.TEAMS_WEBHOOK_URL}
@@ -117,7 +117,7 @@ RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
             // Kirim notifikasi ke Teams jika build gagal
             script {
                 def message = "Build and Deployment Failed! Commit: ${env.GIT_COMMIT_SHORT}"
-                bat """
+                sh """
                 curl -H "Content-Type: application/json" -d '{
                     "text": "${message}"
                 }' ${env.TEAMS_WEBHOOK_URL}
