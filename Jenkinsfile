@@ -1,129 +1,97 @@
 pipeline {
     agent any
-    tools {
-        jdk 'JDK 21'
-        maven 'maven3'
-    }
 
     environment {
-        GIT_COMMIT_SHORT = "${sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()}"
-        TEAMS_WEBHOOK_URL = 'https://telkomuniversityofficial.webhook.office.com/webhookb2/32a7e491-58ba-4d00-80ce-9235050979f7@90affe0f-c2a3-4108-bb98-6ceb4e94ef15/IncomingWebhook/0e24ad599f5c4fbd8525cf35fe91cb92/5eb143ec-c5e8-4183-aed2-5634c1e19a7a/V2zYbXK6ZdAjbU5FGzUN6IDSaLh5TWHGdC2Gjlfk7EOnc1'
+        IMAGE_TAG = ''
     }
 
     stages {
-        stage('Checkout') {
+        stage('Source Code Checkout') {
             steps {
-                // Checkout repository dari GitHub dengan menggunakan kredensial Anda
-                git credentialsId: 'github-credentials-id', branch: 'main', url: 'https://github.com/ahmadilmannafia7/pandawa-project-1.git'
-            }
-        }
-
-        stage('Create Dockerfile') {
-            steps {
-                writeFile file: 'Dockerfile', text: '''
-FROM php:8.2-fpm
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    libicu-dev
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd &&
-    docker-php-ext-configure intl &&
-    docker-php-ext-install intl
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer &&
-    chown -R $user:$user /home/$user
-
-# Set working directory
-WORKDIR /var/www
-
-# Add permissions for www-data
-COPY . /var/www/
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-'''
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                // Build Docker image dengan tag berdasarkan commit
-                sh "docker build -t ahmadilmannafia/pandawa-app:${env.GIT_COMMIT_SHORT} ."
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                // Login ke Docker Hub menggunakan kredensial
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh """
-                    echo '${DOCKER_PASS}' | docker login -u ${DOCKER_USER} --password-stdin
-                    docker push ahmadilmannafia/pandawa-app:${env.GIT_COMMIT_SHORT}
-                    """
+                script {
+                    try {
+                        checkout scm: [
+                            $class: 'GitSCM', 
+                            branches: [[name: '*/main']],
+                            userRemoteConfigs: [[url: 'https://github.com/farul1/Kasir_CafeVNT', credentialsId: 'cafevnt-github']]
+                        ]
+                    } catch (Exception e) {
+                        error "Source code checkout failed: ${e.message}"
+                    }
                 }
             }
         }
 
-        stage('Deploy Laravel Application') {
+        stage('Retrieve Commit Hash') {
             steps {
-                // Deploy aplikasi Laravel menggunakan Docker Compose
-                sshagent(['ssh-credentials-id']) {
-                    sh """
-                    ssh your-deployment-server << EOF
-                    # Pull image terbaru
-                    docker-compose pull
+                script {
+                    try {
+                        def commitHash = bat(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                        IMAGE_TAG = commitHash
+                    } catch (Exception e) {
+                        error "Unable to retrieve commit hash: ${e.message}"
+                    }
+                }
+            }
+        }
 
-                    # Shutdown container yang sedang berjalan
-                    docker-compose down
+        stage('Dependency Installation') {
+            steps {
+                script {
+                    try {
+                        def isGdEnabled = bat(script: 'php -m | findstr gd', returnStatus: true)
+                        if (isGdEnabled != 0) {
+                            error "PHP GD extension is not enabled. Please check php.ini."
+                        }
+                        bat 'composer install --no-dev --optimize-autoloader'
+                    } catch (Exception e) {
+                        error "Dependency installation failed: ${e.message}"
+                    }
+                }
+            }
+        }
 
-                    # Jalankan ulang container dengan force recreate
-                    docker-compose up -d --force-recreate
-                    EOF
-                    """
+        stage('Build Docker Image') {
+            when {
+                expression { currentBuild.result == null }
+            }
+            steps {
+                script {
+                    try {
+                        bat "docker build -t farul672/vnt_kasir:${IMAGE_TAG} ."
+                    } catch (Exception e) {
+                        error "Docker image build failed: ${e.message}"
+                    }
                 }
             }
         }
     }
 
     post {
+        always {
+            echo 'Cleaning workspace after build...'
+            cleanWs()
+        }
+
         success {
-            // Kirim notifikasi ke Teams jika build berhasil
+            echo 'Pipeline completed successfully!'
             script {
-                def message = "Build and Deployment Successful! Commit: ${env.GIT_COMMIT_SHORT}"
+                def successMessage = ":rocket: **Build Successful!** Docker image tagged: ${IMAGE_TAG}. :tada: The cafe cashier system is ready to launch! Check the Jenkins logs for more info, and let's get brewing! :coffee:"
                 sh """
                 curl -H "Content-Type: application/json" -d '{
-                    "text": "${message}"
+                    "text": "${successMessage}"
                 }' ${env.TEAMS_WEBHOOK_URL}
                 """
             }
         }
 
         failure {
-            // Kirim notifikasi ke Teams jika build gagal
+            echo 'Pipeline failed, check logs for more details.'
             script {
-                def message = "Build and Deployment Failed! Commit: ${env.GIT_COMMIT_SHORT}"
+                def failureMessage = ':x: **Build Failed!** Something went wrong during the build. Check the logs to fix the issue. We’ve got this! :muscle:'
                 sh """
                 curl -H "Content-Type: application/json" -d '{
-                    "text": "${message}"
+                    "text": "${failureMessage}"
                 }' ${env.TEAMS_WEBHOOK_URL}
                 """
             }
