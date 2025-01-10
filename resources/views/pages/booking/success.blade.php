@@ -27,13 +27,15 @@
                         <div>
                             <p class="text-sm text-garuda-grey">Departure</p>
                             <p class="font-semibold text-lg">
-                                {{ $transaction->flight->segments->first()->airport->name }}({{ $transaction->flight->segments->first()->airport->iata_code }})
+                                {{ $transaction->flight->segments->first()->airport->name }}
+                                ({{ $transaction->flight->segments->first()->airport->iata_code }})
                             </p>
                         </div>
                         <div class="text-end">
                             <p class="text-sm text-garuda-grey">Arrival</p>
                             <p class="font-semibold text-lg">
-                                {{ $transaction->flight->segments->last()->airport->name }}({{ $transaction->flight->segments->last()->airport->iata_code }})
+                                {{ $transaction->flight->segments->last()->airport->name }}
+                                ({{ $transaction->flight->segments->last()->airport->iata_code }})
                             </p>
                         </div>
                     </div>

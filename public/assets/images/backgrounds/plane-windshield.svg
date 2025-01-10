@@ -4,3 +4,21 @@
 <path d="M372 180L395 95C459.5 141.5 431 257.5 427.5 245.5C424.7 235.9 389.333 197.833 372 180Z" fill="#F3F6FD"/>
 <path d="M64.7725 180L41.7725 95C-22.7275 141.5 5.77246 257.5 9.27246 245.5C12.0725 235.9 47.4391 197.833 64.7725 180Z" fill="#F3F6FD"/>
 </svg>
+
+<!-- <svg width="437" height="247" viewBox="0 0 437 247" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: rgba(243, 246, 253, 0.8); stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: rgba(243, 246, 253, 0.5); stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Panel Kaca Kiri -->
+  <rect x="48" y="0" width="150" height="110" fill="url(#glassGradient)" stroke="#B0C4DE" stroke-width="2" />
+
+  <!-- Panel Kaca Kanan -->
+  <rect x="239" y="0" width="150" height="110" fill="url(#glassGradient)" stroke="#B0C4DE" stroke-width="2" />
+
+  <!-- Garis Bawah Kaca -->
+  <rect x="48" y="110" width="341" height="10" fill="#B0C4DE" />
+</svg> -->

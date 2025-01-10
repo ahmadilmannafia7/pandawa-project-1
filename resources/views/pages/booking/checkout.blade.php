@@ -3,7 +3,7 @@
 @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px]"
-        style="height: 3000px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        style="height: 1800px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
 
     </div>
 </div>

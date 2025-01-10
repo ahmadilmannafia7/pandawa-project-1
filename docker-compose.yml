@@ -1,0 +1,70 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: pandawa
+    container_name: pandawa-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - pandawa
+    depends_on:
+      - db 
+
+  db:
+    image: mysql:8.0
+    container_name: pandawa-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pandawa-project-1
+      MYSQL_ROOT_PASSWORD: ilman123
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql  # Tambahkan ini
+    ports:
+      - "3306:3306" 
+    networks:
+      - pandawa
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pandawa-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: ilman123
+    networks:
+      - pandawa
+    depends_on:
+      - db 
+
+  nginx:
+    image: nginx:alpine
+    container_name: pandawa-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - pandawa
+    depends_on:
+      - app  
+networks:
+  pandawa:
+    driver: bridge
+
+volumes:  
+  mysql_data:

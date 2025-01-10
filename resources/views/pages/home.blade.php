@@ -4,7 +4,7 @@
 @section('include')
 <div id="Background-home" class="absolute w-full h-full top-0 bg-white">
     <div class="absolute top-0 w-full h-[1020px]"
-        style="height: 2000px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
+        style="height: 1500px; background: linear-gradient(135deg, #D4AF37 0%, #F7E7B4 50%, #FFFFFF 100%);">
         <img src="{{ asset('assets/images/backgrounds/pngtree-javanese-arjuna-wayang-png-image_8815856.png') }}"
             class="absolute right-0 top-[147px] object-contain max-h-[481px]" alt="background image"
             style="transform: translateX(-200px);">
@@ -33,12 +33,11 @@
 <div id="Hero-Text" class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto gap-[30px] mt-[86px]">
     <div class="Badge flex items-center w-fit rounded-full p-[8px_14px] gap-[10px] bg-white">
         <img src="assets/images/icons/crown-black.svg" class="w-5 h-5 flex shrink-0" alt="icon">
-        <p class="font-semibold text-sm">Armada Unit Elegan dan Berkelas </p>
+        <p class="font-semibold text-sm">Beli Tiket Dalam Hitungan Detik! </p>
     </div>
     <h1 class="font-extrabold text-[50px] leading-[75px]">Armada unit elegan <br>dan berkelas</h1>
-    <p class="text-lg leading-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia sint mollitia<br>
-        veritatis sapiente repellat porro accusantium nemo enim. <br>Natus modi in quasi quam pariatur ipsam ullam quos
-        velit quo laborum!</p>
+    <p class="text-lg leading-8">Menghadirkan pengalaman perjalanan yang nyaman dan mewah,<br>
+    Pandawa 87 menawarkan armada terbaik dengan desain elegan  <br>dan fasilitas premium. Pilihan sempurna bagi Anda yang mengutamakan <br>kualitas dalam setiap perjalanan.</p>
 </div>
 <form action="{{ route('flight.index') }}" method="GET"
     class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
@@ -51,7 +50,7 @@
                     <button type="button"
                         class="dropdown flex items-center gap-4 p-5 first:pl-6 first:border-l-0 last:pr-6 last:border-r-0"
                         data-dropdown-target="#Departure-Dropdown">
-                        <img src="assets/images/icons/date.svg" class="w-[50px] flex shrink-0" alt="icon">
+                        <img src="assets/images/icons/asal2.png" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Pilih Asal</p>
                             <p id="Departure-Label" class="font-semibold text-lg mt-[2px] text-nowrap">Asal
@@ -69,8 +68,8 @@
                                     <img src="assets/images/icons/arrow-up-circle-black.svg" class="flex shrink-0 w-[34px]"
                                         alt="icon">
                                     <div class="flex flex-col gap-[2px]">
-                                        <p class="font-semibold">{{ $airport->name }} ({{ $airport->iata_code }})</p>
-                                        <p class="text-sm text-garuda-grey">{{ $airport->city }}</p>
+                                        <p class="font-semibold">{{ $airport->city }} ({{ $airport->iata_code }})</p>
+                                        <p class="text-sm text-garuda-grey">{{ $airport->name }}</p>
                                     </div>
                                 </label>
                                 <hr class="border-[#E8EFF7]">
@@ -83,7 +82,7 @@
                     class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                     <button type="button" class="dropdown flex items-center gap-4 p-5 first:pl-6 last:pr-6"
                         data-dropdown-target="#Arrival-Dropdown">
-                        <img src="assets/images/icons/date.svg" class="w-[50px] flex shrink-0" alt="icon">
+                        <img src="assets/images/icons/tujuan2.png" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Pilih Tujuan</p>
                             <p id="Arrival-Label" class="font-semibold text-lg mt-[2px] text-nowrap">Tujuan</p>
@@ -100,8 +99,8 @@
                                     <img src="assets/images/icons/arrow-up-circle-black.svg" class="flex shrink-0 w-[34px]"
                                         alt="icon">
                                     <div class="flex flex-col gap-[2px]">
-                                        <p class="font-semibold">{{ $airport->name }} ({{ $airport->iata_code }})</p>
-                                        <p class="text-sm text-garuda-grey">{{ $airport->city }}</p>
+                                        <p class="font-semibold">{{ $airport->city }} ({{ $airport->iata_code }})</p>
+                                        <p class="text-sm text-garuda-grey">{{ $airport->name }}</p>
                                     </div>
                                 </label>
                                 <hr class="border-[#E8EFF7]">
@@ -114,7 +113,7 @@
                     <input type="date" name="date" id="date" class="absolute top-1/2 -z-10">
                     <button type="button" id="Date-Button"
                         class="relative flex items-center gap-4 p-5 first:pl-6 last:pr-6">
-                        <img src="assets/images/icons/date.svg" class="w-[50px] flex shrink-0" alt="icon">
+                        <img src="assets/images/icons/tanggal.png" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Tanggal</p>
                             <p id="Date-Label" class="font-semibold text-lg mt-[2px] text-nowrap"></p>
@@ -125,7 +124,7 @@
                     class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                     <button type="button" class="dropdown flex items-center gap-4 p-5 first:pl-6 last:pr-6"
                         data-dropdown-target="#Quantity-Dropdown">
-                        <img src="assets/images/icons/date.svg" class="w-[50px] flex shrink-0" alt="icon">
+                        <img src="assets/images/icons/jumlah.png" class="w-[50px] flex shrink-0" alt="icon">
                         <div class="text-left">
                             <p class="text-sm text-garuda-grey">Jumlah</p>
                             <p id="Quantity-Label" class="font-semibold text-lg mt-[2px] text-nowrap"><span
@@ -185,7 +184,7 @@
         </div>
     </div>
 
-    <form action="{{ route('flight.index') }}" method="GET"
+    <!-- <form action="{{ route('flight.index') }}" method="GET"
         class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
         <div class="flex flex-col rounded-[30px] p-[30px] gap-4 bg-white">
             <h2 class="font-bold text-xl leading-[30px]">supported by</h2>
@@ -201,6 +200,6 @@
 
 
         </div>
-    </form>
+    </form> -->
 </section>
 @endsection
