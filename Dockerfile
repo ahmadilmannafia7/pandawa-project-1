@@ -1,8 +1,8 @@
 FROM php:8.2-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# Arguments defined in docker-compose.yml, default values can be added here
+ARG user=myuser
+ARG uid=1000
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -24,7 +24,7 @@ RUN docker-php-ext-configure intl && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user && \
+RUN useradd -G www-data,root -u $uid -d /home/$user -m $user && \
     mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
